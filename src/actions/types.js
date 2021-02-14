@@ -1,0 +1,15 @@
+export const GOOG_SIGN_IN = "GOOG_SIGN_IN";
+export const SIGN_OUT = "SIGN_OUT";
+export const INPUT_VALUE = "INPUT_VALUE";
+export const BUSINESS_NEWS = "BUSINESS_NEWS";
+export const DARK_MODE = "DARK_MODE";
+export const DRAWER_TOGGLE = "DRAWER_TOGGLE"
+export const OPEN_MODAL = "OPEN_MODAL"
+export const CLOSE_MODAL = "CLOSE_MODAL"
+export const FETCH_HOMESTOCK = "FETCH_HOMESTOCK"
+export const FETCH_INDICES = "FETCH_INDICES"
+export const FETCH_DAYCHART = "FETCH_DAYCHART"
+export const FETCH_MINCHART = "FETCH_MINCHART"
+export const FETCH_SSQUOTE = "FETCH_SSQUOTE"
+export const ERROR = "ERROR"
+export const SEARCH_SYMBOL = "SEARCH_SYMBOL"
