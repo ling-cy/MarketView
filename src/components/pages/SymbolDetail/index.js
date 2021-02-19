@@ -12,7 +12,7 @@ const useStyles = makeStyles((theme) => ({
         width: drawerWidth,
     },
     content: {
-        flexGrow: 1,
+        // flexGrow: 1,
         padding: theme.spacing(1),
     },
 }));

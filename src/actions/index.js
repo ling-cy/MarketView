@@ -1,8 +1,8 @@
 import {
     GOOG_SIGN_IN, SIGN_OUT, INPUT_VALUE, BUSINESS_NEWS,
-    DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL,
-    CLOSE_MODAL, FETCH_HOMESTOCK,
-    FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART, FETCH_SSQUOTE, ERROR, SEARCH_SYMBOL
+    DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
+    FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART,
+    FETCH_SSQUOTE, FETCH_SSSTAT, ERROR, SEARCH_SYMBOL
 } from './types';
 import businessNews from '../apis/newsAPI';
 import IEX from '../apis/iexAPI';
@@ -159,17 +159,39 @@ export const fetchSSQuote = (symb) => async dispatch => {
         }
     })
 
+    if (resQuote !== undefined) {
+        dispatch({
+            type: FETCH_SSQUOTE,
+            payload: resQuote.data,
+        })
+    }
+}
+
+export const fetchSSStat = (symb) => async dispatch => {
 
     const resStat = await IEX.get(`/stock/${symb}/stats`, {
         params: {
             token: 'Tsk_bd95bcb47f3f4b1b8e061b1ea86c0b21',
         }
-    });
+    }).catch(err => {
+        if (err.response) {
+            dispatch({
+                type: ERROR,
+                payload: err.response,
+            })
+            history.push('/error')
 
-    if (resQuote !== undefined) {
+        } else if (err.request) {
+            history.push('/')
+        } else {
+            history.push('/')
+        }
+    })
+
+    if (resStat !== undefined) {
         dispatch({
-            type: FETCH_SSQUOTE,
-            payload: resQuote.data,
+            type: FETCH_SSSTAT,
+            payload: resStat.data,
         })
     }
 }
@@ -182,6 +204,7 @@ export const searchSymb = (symb) => async dispatch => {
             search: `${symb}`,
             market: 'stocks',
             locale: 'us',
+            active: true,
             apiKey: 'KgVsqTE75pOyzqhII7HITcTNNKZrRup6',
         }
     })

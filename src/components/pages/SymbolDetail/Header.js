@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSSQuote } from '../../../actions'
+import { fetchSSQuote, fetchSSStat } from '../../../actions'
 
 
 import PropTypes from 'prop-types';
@@ -104,6 +104,7 @@ class Header extends React.Component {
         // const searchParams = new URLSearchParams(location.search)
         // const symbol = searchParams.get('symb')
         this.props.fetchSSQuote(this.props.symb);
+        this.props.fetchSSStat(this.props.symb);
     }
 
 
@@ -171,5 +172,5 @@ Header.propTypes = {
 export default withStyles(styles)(
     connect(
         mapStateToProps,
-        { fetchSSQuote }
+        { fetchSSQuote, fetchSSStat }
     )(Header));

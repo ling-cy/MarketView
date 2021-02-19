@@ -9,7 +9,7 @@ import Box from '@material-ui/core/Box';
 
 import CallingDayChart from '../../reusable/Chart/CallingDayChart'
 import CallingMinChart from '../../reusable/Chart/CallingMinChart'
-import Quote from './Quote'
+import Quote from './Quote/Quote'
 
 const StyledTabs = withStyles({
     root: {
@@ -106,7 +106,7 @@ export default function ScrollableTabsButtonAuto(props) {
                 aria-label="scrollable auto tabs"
             >
                 <StyledTab label="Quote" {...a11yProps(0)} />
-                <StyledTab label="Min Chart" {...a11yProps(1)} />
+                <StyledTab label="Intraday Chart" {...a11yProps(1)} />
                 <StyledTab label="Day Chart" {...a11yProps(2)} />
                 <StyledTab label="News" {...a11yProps(3)} />
                 <StyledTab label="Statistic" {...a11yProps(4)} />
@@ -114,7 +114,7 @@ export default function ScrollableTabsButtonAuto(props) {
             </StyledTabs>
             {/* </AppBar> */}
             <TabPanel value={value} index={0}>
-                <Quote />
+                <Quote symb={props.symb} />
             </TabPanel>
 
             <TabPanel value={value} index={1}>

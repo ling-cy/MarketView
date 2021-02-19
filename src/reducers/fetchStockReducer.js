@@ -1,4 +1,4 @@
-import { FETCH_DAYCHART, FETCH_MINCHART, FETCH_SSQUOTE, ERROR } from '../actions/types';
+import { FETCH_DAYCHART, FETCH_MINCHART, FETCH_SSQUOTE, FETCH_SSSTAT, ERROR } from '../actions/types';
 
 export default (state = {}, action) => {
     switch (action.type) {
@@ -8,6 +8,8 @@ export default (state = {}, action) => {
             return { ...state, minChart: action.payload.minChart };
         case FETCH_SSQUOTE:
             return { ...state, resQuote: action.payload };
+        case FETCH_SSSTAT:
+            return { ...state, resStat: action.payload };
         case ERROR:
             return { ...state, error: action.payload }
         default:
