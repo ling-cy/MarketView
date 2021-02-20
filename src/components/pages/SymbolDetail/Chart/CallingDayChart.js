@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchDayChart } from '../../../actions';
+import { fetchDayChart } from '../../../../actions';
 import DayChart from './DayChart';
 
 

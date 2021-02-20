@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchMinChart } from '../../../actions';
+import { fetchMinChart } from '../../../../actions';
 import MinChart from './MinChart';
 
 
