@@ -7,9 +7,11 @@ import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 
-import CallingDayChart from '../../reusable/Chart/CallingDayChart'
-import CallingMinChart from '../../reusable/Chart/CallingMinChart'
+import CallingDayChart from './Chart/CallingDayChart'
+import CallingMinChart from './Chart/CallingMinChart'
 import Quote from './Quote/Quote'
+import News from './News'
+import Discussion from './Discussion';
 
 const StyledTabs = withStyles({
     root: {
@@ -57,7 +59,7 @@ function TabPanel(props) {
             {...other}
         >
             {value === index && (
-                <Box p={3}>
+                <Box p={1}>
                     <Typography>{children}</Typography>
                 </Box>
             )}
@@ -109,8 +111,7 @@ export default function ScrollableTabsButtonAuto(props) {
                 <StyledTab label="Intraday Chart" {...a11yProps(1)} />
                 <StyledTab label="Day Chart" {...a11yProps(2)} />
                 <StyledTab label="News" {...a11yProps(3)} />
-                <StyledTab label="Statistic" {...a11yProps(4)} />
-                <StyledTab label="Discussion" {...a11yProps(5)} />
+                <StyledTab label="Discussion" {...a11yProps(4)} />
             </StyledTabs>
             {/* </AppBar> */}
             <TabPanel value={value} index={0}>
@@ -127,15 +128,11 @@ export default function ScrollableTabsButtonAuto(props) {
             </TabPanel>
 
             <TabPanel value={value} index={3}>
-                Item Four
+                <News symb={props.symb} />
             </TabPanel>
 
             <TabPanel value={value} index={4}>
-                Item Five
-            </TabPanel>
-
-            <TabPanel value={value} index={5}>
-                Item Six
+                <Discussion symb={props.symb} />
             </TabPanel>
 
         </div>

@@ -2,7 +2,7 @@ import {
     GOOG_SIGN_IN, SIGN_OUT, INPUT_VALUE, BUSINESS_NEWS,
     DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
     FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART,
-    FETCH_SSQUOTE, FETCH_SSSTAT, ERROR, SEARCH_SYMBOL
+    FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, ERROR, SEARCH_SYMBOL
 } from './types';
 import businessNews from '../apis/newsAPI';
 import IEX from '../apis/iexAPI';
@@ -195,6 +195,18 @@ export const fetchSSStat = (symb) => async dispatch => {
         })
     }
 }
+
+export const fetchSSNews = (symb) => async dispatch => {
+    const response = await businessNews.get('/everything', {
+        params: {
+            q: symb,
+            sortBy: 'publishedAt',
+            language: 'en',
+            apiKey: 'e43b9bd75f60429d83c267510ede0e74'
+        }
+    });
+    dispatch({ type: FETCH_SSNEWS, payload: response.data.articles })
+};
 
 export const searchSymb = (symb) => async dispatch => {
     const resSearch = await Polygon.get('/v2/reference/tickers', {
