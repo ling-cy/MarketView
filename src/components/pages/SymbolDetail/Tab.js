@@ -11,7 +11,7 @@ import CallingDayChart from './Chart/CallingDayChart'
 import CallingMinChart from './Chart/CallingMinChart'
 import Quote from './Quote/Quote'
 import News from './News'
-import Discussion from './Discussion';
+import Discussion from './Discussion/Discussion';
 
 const StyledTabs = withStyles({
     root: {
