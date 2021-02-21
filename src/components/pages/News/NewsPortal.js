@@ -19,7 +19,7 @@ import {
     TwitterShareButton, WhatsappShareButton, TelegramShareButton
 } from 'react-share';
 
-import { handleModalClose } from '../../actions'
+import { handleModalClose } from '../../../actions'
 
 
 let theme = createMuiTheme();

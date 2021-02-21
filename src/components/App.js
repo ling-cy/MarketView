@@ -8,11 +8,9 @@ import { fetchBusinessNews, fetchHomeStock, fetchIndices } from '../actions'
 
 
 import ResponsiveAppBar from './ResponsiveAppBar';
-import Home from './pages/Home';
-import UsStock from './pages/UsStock';
-import Watchlist from './pages/Watchlist';
+import Home from './pages/Home/Home';
 import Search from './pages/SearchResult';
-import SymbolDetail from './pages/SymbolDetail';
+import SymbolDetail from './pages/SymbolDetail/SymbolDetail';
 
 import PageNotFound from './errors/PageNotFound';
 import FetchError from './errors/FetchError';
@@ -48,8 +46,6 @@ class App extends React.Component {
                     <ResponsiveAppBar />
                     <Switch>
                         <Route path='/' exact component={Home} />
-                        <Route path='/us-stock' exact component={UsStock} />
-                        <Route path='/watchlist' exact component={Watchlist} />
                         <Route path='/search' exact component={Search} />
                         <Route path='/search/:symb' component={SymbolDetail} />
                         <Route path='/error' component={FetchError} />

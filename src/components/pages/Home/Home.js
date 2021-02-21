@@ -6,11 +6,11 @@ import { createMuiTheme, responsiveFontSizes, withStyles } from '@material-ui/co
 import { Paper, Grid, CircularProgress, Typography } from '@material-ui/core';
 
 
-import { handleModalOpen, handleModalClose } from '../../actions';
-import NewsCard from '../reusable/NewsCard';
-import NewsPortal from '../reusable/NewsPortal';
-import StockTable from '../reusable/StockTable'
-import IndexBox from '../reusable/IndexBox'
+import { handleModalOpen, handleModalClose } from '../../../actions';
+import NewsCard from '../News/NewsCard';
+import NewsPortal from '../News/NewsPortal';
+import StockTable from './StockTable'
+import IndexBox from './IndexBox'
 
 
 let theme = createMuiTheme();
@@ -24,11 +24,11 @@ const styles = (theme) => ({
     //     width: drawerWidth,
     // },
     content: {
-        flexGrow: 1,
+        // flexGrow: 1,
         padding: theme.spacing(1),
     },
     root: {
-        flexGrow: 1,
+        // flexGrow: 1,
     },
     cir: {
         '& > * + *': {
@@ -185,49 +185,47 @@ class Home extends React.Component {
     render() {
         const { classes } = this.props;
         return (
-            <React.Fragment>
-                <main className={classes.content}>
-                    <div className={classes.toolbar} />
-                    <div className={classes.root}>
-                        <Grid
-                            container
-                            spacing={1}
-                            direction='column'
-                            justify='flex-start'
-                            alignItems='center'
-                        >
-                            <Grid item xs={12} className={classes.indicesPanel}>
+            <main className={classes.content}>
+                <div className={classes.toolbar} />
+                <div className={classes.root}>
+                    <Grid
+                        container
+                        spacing={1}
+                        direction='column'
+                        justify='flex-start'
+                        alignItems='center'
+                    >
+                        <Grid item xs={12} className={classes.indicesPanel}>
+                            <Paper className={classes.paper}>
+                                {this.renderIndices()}
+                            </Paper>
+                        </Grid>
+                        <Grid item container spacing={1} className={classes.indicesPanel}>
+                            <Grid item className={classes.newsPanel}>
+                                <Typography variant="h5"><b>Latest</b></Typography>
                                 <Paper className={classes.paper}>
-                                    {this.renderIndices()}
+                                    {this.renderBusinessNews()}
                                 </Paper>
                             </Grid>
-                            <Grid item container spacing={1} className={classes.indicesPanel}>
-                                <Grid item className={classes.newsPanel}>
-                                    <Typography variant="h5"><b>Latest</b></Typography>
-                                    <Paper className={classes.paper}>
-                                        {this.renderBusinessNews()}
-                                    </Paper>
-                                </Grid>
-                                <Grid item className={classes.stockPanel}>
-                                    <Typography variant="h5"><b>What's Moving</b></Typography>
-                                    <Paper className={classes.paper}>
-                                        <Typography className={classes.spHeader}>Stocks: Most Actives</Typography>
-                                        {this.renderActive()}
-                                    </Paper>
-                                    <Paper className={classes.paper}>
-                                        <Typography className={classes.spHeader}>Stocks: Gainers</Typography>
-                                        {this.renderGainer()}
-                                    </Paper>
-                                    <Paper className={classes.paper}>
-                                        <Typography className={classes.spHeader}>Stocks: Losers</Typography>
-                                        {this.renderLoser()}
-                                    </Paper>
-                                </Grid>
+                            <Grid item className={classes.stockPanel}>
+                                <Typography variant="h5"><b>What's Moving</b></Typography>
+                                <Paper className={classes.paper}>
+                                    <Typography className={classes.spHeader}>Stocks: Most Actives</Typography>
+                                    {this.renderActive()}
+                                </Paper>
+                                <Paper className={classes.paper}>
+                                    <Typography className={classes.spHeader}>Stocks: Gainers</Typography>
+                                    {this.renderGainer()}
+                                </Paper>
+                                <Paper className={classes.paper}>
+                                    <Typography className={classes.spHeader}>Stocks: Losers</Typography>
+                                    {this.renderLoser()}
+                                </Paper>
                             </Grid>
                         </Grid>
-                    </div>
-                </main>
-            </React.Fragment >
+                    </Grid>
+                </div>
+            </main>
         )
     }
 };
@@ -240,7 +238,6 @@ const mapStateToProps = (state) => {
     return {
         businessNews: state.fetchData,
         modalState: state.modal,
-        theme: state.theme.theme,
         indices: state.indices.indices,
         stockHome: state.stockHome,
     }

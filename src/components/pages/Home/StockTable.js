@@ -4,7 +4,7 @@ import {
     Table, TableBody, TableCell, TableContainer,
     TableHead, TableRow, Paper, Typography, withStyles
 } from '@material-ui/core';
-import history from '../../history'
+import history from '../../../history'
 
 
 

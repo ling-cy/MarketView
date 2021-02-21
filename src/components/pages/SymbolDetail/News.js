@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import { Grid } from '@material-ui/core';
 import { fetchSSNews, handleModalOpen } from '../../../actions';
-import NewsCard from '../../reusable/NewsCard';
-import NewsPortal from '../../reusable/NewsPortal';
+import NewsCard from '../News/NewsCard';
+import NewsPortal from '../News/NewsPortal';
 
 
 class SSNews extends React.Component {
@@ -13,7 +13,6 @@ class SSNews extends React.Component {
     }
 
     renderNews() {
-        const { classes } = this.props;
         const news = this.props.news;
         if (!news || news === null) {
             return (
