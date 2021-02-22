@@ -2,8 +2,8 @@ import React from 'react';
 import { useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles';
 import { Container } from '@material-ui/core';
-import Tab from './Tab';
-import Header from './Header';
+import Tab from './Tab/Tab';
+import Header from './Header/Header';
 
 
 const useStyles = makeStyles((theme) => ({
