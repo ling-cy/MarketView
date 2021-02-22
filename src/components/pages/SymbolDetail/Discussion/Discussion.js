@@ -33,9 +33,7 @@ const Discussion = (props) => {
             alignItems='center'
         >
             <Grid item >
-                <div id='stocktwits'>
-                    {/* <div id='stocktwits-widget-news'></div> */}
-                </div>
+                <div id='stocktwits'></div>
             </Grid>
         </Grid>
 

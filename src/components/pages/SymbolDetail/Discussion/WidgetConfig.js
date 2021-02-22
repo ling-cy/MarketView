@@ -6,10 +6,10 @@ const dw = (value) => {
     } if (value >= 1250) {
         return 1200;
     }
-    return (value / 50).toFixed(0) * 50 - 50
+    return (value / 50).toFixed(0) * 50 - 100
 }
 
-const dh = (value) => (value / 50).toFixed(0) * 50 - 300;
+const dh = (value) => (value / 50).toFixed(0) * 50 - 350;
 
 const innerHTML = (isDarkMode, symb, width, height) => {
     if (isDarkMode === true) {

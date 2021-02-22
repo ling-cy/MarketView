@@ -13,7 +13,6 @@ const useStyles = makeStyles((theme) => ({
     },
     Container: {
         root: {
-            display: 'flex',
             justifyContent: 'center',
             alignItems: 'center',
         }

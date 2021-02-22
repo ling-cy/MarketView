@@ -42,6 +42,7 @@ export const TContainer = withStyles((theme) => ({
         flexGrow: 1,
         width: '100%',
         maxWidth: '1250px',
+        padding: 0,
         backgroundColor: theme.palette.background.paper,
     },
 }))(Container)
