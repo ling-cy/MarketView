@@ -1,5 +1,5 @@
 import {
-    GOOG_SIGN_IN, SIGN_OUT, INPUT_VALUE, BUSINESS_NEWS,
+    INPUT_VALUE, BUSINESS_NEWS,
     DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
     FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART,
     FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, ERROR, SEARCH_SYMBOL
@@ -10,24 +10,6 @@ import FM from '../apis/financialModelingAPI'
 import Polygon from '../apis/polygonioAPI'
 import history from '../history';
 
-
-
-//Auth
-export const googSignIn = (userId, email) => {
-    return {
-        type: GOOG_SIGN_IN,
-        payload: {
-            userId: userId,
-            email: email
-        }
-    }
-};
-
-export const signOut = () => {
-    return {
-        type: SIGN_OUT
-    }
-};
 
 export const inputSearchBar = (input) => {
     return {
