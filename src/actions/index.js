@@ -1,5 +1,5 @@
 import {
-    INPUT_VALUE, BUSINESS_NEWS,
+    BUSINESS_NEWS,
     DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
     FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART,
     FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, ERROR, SEARCH_SYMBOL
@@ -10,13 +10,6 @@ import FM from '../apis/financialModelingAPI'
 import Polygon from '../apis/polygonioAPI'
 import history from '../history';
 
-
-export const inputSearchBar = (input) => {
-    return {
-        type: INPUT_VALUE,
-        payload: input
-    }
-};
 
 export const fetchBusinessNews = () => async dispatch => {
     const response = await businessNews.get('/top-headlines', {

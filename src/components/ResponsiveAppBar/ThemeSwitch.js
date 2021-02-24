@@ -9,7 +9,6 @@ import Brightness4Icon from '@material-ui/icons/Brightness4';
 class ThemeSwitch extends React.Component {
 
 
-
     onDarkModeClick = () => {
         this.props.darkModeOn(true);
     };

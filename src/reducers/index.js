@@ -1,6 +1,5 @@
 import { combineReducers } from 'redux';
 
-import inputValueReducer from './inputValueReducer';
 import fetchNewsDataReducer from './fetchNewsDataReducer';
 import themeReducer from './themeReducer';
 import drawerReducer from './drawerReducer';
@@ -12,7 +11,6 @@ import searchSymbolReducer from './searchSymbolReducer';
 
 export default combineReducers(
     {
-        inText: inputValueReducer,
         fetchData: fetchNewsDataReducer,
         theme: themeReducer,
         isDrawerOpen: drawerReducer,

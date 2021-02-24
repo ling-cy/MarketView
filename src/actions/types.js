@@ -1,4 +1,3 @@
-export const INPUT_VALUE = "INPUT_VALUE";
 export const BUSINESS_NEWS = "BUSINESS_NEWS";
 export const DARK_MODE = "DARK_MODE";
 export const DRAWER_TOGGLE = "DRAWER_TOGGLE"

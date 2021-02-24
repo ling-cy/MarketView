@@ -1,17 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux'
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux'
 
 import history from '../../history'
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import { InputBase } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import { fade } from '@material-ui/core/styles';
 
-import { inputSearchBar, searchSymb } from '../../actions'
+import { searchSymb } from '../../actions'
 
-const styles = theme => ({
-    //search bar
+const useStyles = makeStyles((theme) => ({
     searchIcon: {
         padding: theme.spacing(0, 2),
         height: '100%',
@@ -49,53 +47,43 @@ const styles = theme => ({
             width: '20ch',
         },
     },
-});
+}));
 
 
-class SearchBar extends React.Component {
+const SearchBar = () => {
 
-    render() {
-        const { classes } = this.props;
-        const handleKeyPress = e => {
-            if (e.key === 'Enter' && this.props.inValue !== '') {
-                this.props.searchSymb(this.props.inValue)
-                history.push(`/search`)
-            }
+    const { input, setInput } = useState('');
+
+    const dispatch = useDispatch();
+
+    const classes = useStyles();
+    const handleKeyPress = e => {
+        if (e.key === 'Enter' && input !== '' && input !== undefined) {
+            dispatch(searchSymb(input));
+            history.push(`/search`)
         }
-        return (
-            <div className={classes.search}>
-                <div className={classes.searchIcon}>
-                    <SearchIcon />
-                </div>
-
-                <InputBase
-                    placeholder="Search for symbols…"
-                    classes={{
-                        root: classes.inputRoot,
-                        input: classes.inputInput,
-                    }}
-                    inputProps={{ 'aria-label': 'search' }}
-                    onChange={e => {
-                        this.props.inputSearchBar(e.target.value)
-                    }}
-                    // value={this.props.inValue}
-                    onKeyPress={handleKeyPress}
-                />
-
-            </div>)
     }
+    return (
+        <div className={classes.search}>
+            <div className={classes.searchIcon}>
+                <SearchIcon />
+            </div>
+
+            <InputBase
+                placeholder="Search for symbols…"
+                classes={{
+                    root: classes.inputRoot,
+                    input: classes.inputInput,
+                }}
+                inputProps={{ 'aria-label': 'search' }}
+                onChange={e => {
+                    setInput(e.target.value)
+                }}
+                // value={this.props.inValue}
+                onKeyPress={handleKeyPress}
+            />
+
+        </div>)
 };
 
-SearchBar.propTypes = {
-    classes: PropTypes.object.isRequired,
-};
-
-const mapStateToProps = (state) => {
-    return { inValue: state.inText.inputValue }
-}
-
-export default withStyles(styles)(
-    connect(
-        mapStateToProps,
-        { inputSearchBar, searchSymb }
-    )(SearchBar));
+export default SearchBar;
