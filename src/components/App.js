@@ -11,13 +11,19 @@ import ResponsiveAppBar from './ResponsiveAppBar';
 import Home from './pages/Home/Home';
 import Search from './pages/SearchResult';
 import SymbolDetail from './pages/SymbolDetail/SymbolDetail';
+import Footer from './footer/footer'
 
 import PageNotFound from './errors/PageNotFound';
 import FetchError from './errors/FetchError';
 
 const styles = () => ({
     root: {
-        display: 'block',
+        display: 'flex',
+        flexDirection: 'column',
+        minHeight: '100vh',
+    },
+    content: {
+        flexGrow: 1,
     },
 });
 
@@ -27,7 +33,6 @@ class App extends React.Component {
         this.props.fetchBusinessNews();
         this.props.fetchHomeStock();
         this.props.fetchIndices();
-        console.log(localStorage.getItem('darkMode'))
     }
 
     render() {
@@ -43,14 +48,17 @@ class App extends React.Component {
         return (
             <ThemeProvider theme={theme}>
                 <div className={classes.root}>
-                    <ResponsiveAppBar />
-                    <Switch>
-                        <Route path='/' exact component={Home} />
-                        <Route path='/search' exact component={Search} />
-                        <Route path='/search/:symb' component={SymbolDetail} />
-                        <Route path='/error' component={FetchError} />
-                        <Route component={PageNotFound} />
-                    </Switch>
+                    <div className={classes.content}>
+                        <ResponsiveAppBar />
+                        <Switch>
+                            <Route path='/' exact component={Home} />
+                            <Route path='/search' exact component={Search} />
+                            <Route path='/search/:symb' component={SymbolDetail} />
+                            <Route path='/error' component={FetchError} />
+                            <Route component={PageNotFound} />
+                        </Switch>
+                    </div>
+                    <Footer />
                 </div >
             </ThemeProvider>
         )
@@ -61,7 +69,6 @@ App.propTypes = {
     classes: PropTypes.object.isRequired,
     match: PropTypes.object.isRequired,
     location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = (state) => {

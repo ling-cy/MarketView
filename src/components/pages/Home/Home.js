@@ -16,20 +16,13 @@ import IndexBox from './IndexBox'
 let theme = createMuiTheme();
 theme = responsiveFontSizes(theme);
 
-// const drawerWidth = 180;
 
 const styles = (theme) => ({
     toolbar: theme.mixins.toolbar,
-    // drawerPaper: {
-    //     width: drawerWidth,
-    // },
     content: {
-        // flexGrow: 1,
         padding: theme.spacing(1),
     },
-    root: {
-        // flexGrow: 1,
-    },
+
     cir: {
         '& > * + *': {
             marginLeft: theme.spacing(2),
@@ -52,7 +45,6 @@ const styles = (theme) => ({
         outline: 0,
     },
     stockPanel: {
-        // maxWidth: 400,
         minWidth: 300,
     },
     newsPanel: {
@@ -187,44 +179,42 @@ class Home extends React.Component {
         return (
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <div className={classes.root}>
-                    <Grid
-                        container
-                        spacing={1}
-                        direction='column'
-                        justify='flex-start'
-                        alignItems='center'
-                    >
-                        <Grid item xs={12} className={classes.indicesPanel}>
+                <Grid
+                    container
+                    spacing={1}
+                    direction='column'
+                    justify='flex-start'
+                    alignItems='center'
+                >
+                    <Grid item xs={12} className={classes.indicesPanel}>
+                        <Paper className={classes.paper}>
+                            {this.renderIndices()}
+                        </Paper>
+                    </Grid>
+                    <Grid item container spacing={1} className={classes.indicesPanel}>
+                        <Grid item className={classes.newsPanel}>
+                            <Typography variant="h5"><b>Latest</b></Typography>
                             <Paper className={classes.paper}>
-                                {this.renderIndices()}
+                                {this.renderBusinessNews()}
                             </Paper>
                         </Grid>
-                        <Grid item container spacing={1} className={classes.indicesPanel}>
-                            <Grid item className={classes.newsPanel}>
-                                <Typography variant="h5"><b>Latest</b></Typography>
-                                <Paper className={classes.paper}>
-                                    {this.renderBusinessNews()}
-                                </Paper>
-                            </Grid>
-                            <Grid item className={classes.stockPanel}>
-                                <Typography variant="h5"><b>What's Moving</b></Typography>
-                                <Paper className={classes.paper}>
-                                    <Typography className={classes.spHeader}>Stocks: Most Actives</Typography>
-                                    {this.renderActive()}
-                                </Paper>
-                                <Paper className={classes.paper}>
-                                    <Typography className={classes.spHeader}>Stocks: Gainers</Typography>
-                                    {this.renderGainer()}
-                                </Paper>
-                                <Paper className={classes.paper}>
-                                    <Typography className={classes.spHeader}>Stocks: Losers</Typography>
-                                    {this.renderLoser()}
-                                </Paper>
-                            </Grid>
+                        <Grid item className={classes.stockPanel}>
+                            <Typography variant="h5"><b>What's Moving</b></Typography>
+                            <Paper className={classes.paper}>
+                                <Typography className={classes.spHeader}>Stocks: Most Actives</Typography>
+                                {this.renderActive()}
+                            </Paper>
+                            <Paper className={classes.paper}>
+                                <Typography className={classes.spHeader}>Stocks: Gainers</Typography>
+                                {this.renderGainer()}
+                            </Paper>
+                            <Paper className={classes.paper}>
+                                <Typography className={classes.spHeader}>Stocks: Losers</Typography>
+                                {this.renderLoser()}
+                            </Paper>
                         </Grid>
                     </Grid>
-                </div>
+                </Grid>
             </main>
         )
     }
