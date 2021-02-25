@@ -1,8 +1,8 @@
 import {
     BUSINESS_NEWS,
     DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
-    FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART,
-    FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, ERROR, SEARCH_SYMBOL
+    FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, ERROR,
+    FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, SEARCH_SYMBOL
 } from './types';
 import businessNews from '../apis/newsAPI';
 import IEX from '../apis/iexAPI';
@@ -17,7 +17,7 @@ export const fetchBusinessNews = () => async dispatch => {
             sources: 'business-insider,the-wall-street-journal',
             apiKey: `${process.env.REACT_APP_API_KEY_businessNews}`
         }
-    });
+    })
     dispatch({ type: BUSINESS_NEWS, payload: response.data.articles })
 };
 
@@ -56,15 +56,7 @@ export const fetchHomeStock = () => async dispatch => {
         params: {
             token: `${process.env.REACT_APP_API_KEY_IEX1}`,
         }
-    }).catch(err => {
-        if (err.response) {
-            // client received an error response (5xx, 4xx)
-        } else if (err.request) {
-            // client never received a response, or request never left
-        } else {
-            // anything else
-        }
-    });
+    })
     const resLose = await IEX.get('/stock/market/list/losers', {
         params: {
             token: `${process.env.REACT_APP_API_KEY_IEX1}`,
@@ -126,11 +118,6 @@ export const fetchSSQuote = (symb) => async dispatch => {
                 payload: err.response,
             })
             history.push('/error')
-
-        } else if (err.request) {
-            history.push('/')
-        } else {
-            history.push('/')
         }
     })
 
@@ -155,11 +142,6 @@ export const fetchSSStat = (symb) => async dispatch => {
                 payload: err.response,
             })
             history.push('/error')
-
-        } else if (err.request) {
-            history.push('/')
-        } else {
-            history.push('/')
         }
     })
 
@@ -200,5 +182,4 @@ export const searchSymb = (symb) => async dispatch => {
         payload: resSearch.data,
     })
 };
-
 

@@ -10,8 +10,6 @@ export default (state = {}, action) => {
             return { ...state, resStat: action.payload };
         case FETCH_SSNEWS:
             return { ...state, resNews: action.payload };
-        case ERROR:
-            return { ...state, error: action.payload };
         default:
             return state;
     }

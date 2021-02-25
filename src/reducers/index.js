@@ -8,6 +8,7 @@ import fetchStockReducer from './fetchStockReducer';
 import indicesReducer from './indicesReducer';
 import stockHomeReducer from './stockHomeReducer';
 import searchSymbolReducer from './searchSymbolReducer';
+import errorReducer from './errorReducer';
 
 export default combineReducers(
     {
@@ -19,5 +20,6 @@ export default combineReducers(
         indices: indicesReducer,
         stockHome: stockHomeReducer,
         symbSearch: searchSymbolReducer,
+        error: errorReducer,
     }
 )

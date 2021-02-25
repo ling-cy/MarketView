@@ -13,8 +13,7 @@ import Search from './pages/SearchResult/SearchResult';
 import SymbolDetail from './pages/SymbolDetail/SymbolDetail';
 import Footer from './footer/footer'
 
-import PageNotFound from './errors/PageNotFound';
-import FetchError from './errors/FetchError';
+import Error from './pages/errors/Error';
 
 const styles = () => ({
     root: {
@@ -54,8 +53,8 @@ class App extends React.Component {
                             <Route path='/' exact component={Home} />
                             <Route path='/search' exact component={Search} />
                             <Route path='/search/:symb' component={SymbolDetail} />
-                            <Route path='/error' component={FetchError} />
-                            <Route component={PageNotFound} />
+                            <Route path='/error' component={Error} />
+                            <Route component={Error} />
                         </Switch>
                     </div>
                     <Footer />
