@@ -1,7 +1,7 @@
 import {
     BUSINESS_NEWS,
     DARK_MODE, DRAWER_TOGGLE, OPEN_MODAL, CLOSE_MODAL,
-    FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, FETCH_MINCHART,
+    FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART,
     FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, ERROR, SEARCH_SYMBOL
 } from './types';
 import businessNews from '../apis/newsAPI';
@@ -15,7 +15,7 @@ export const fetchBusinessNews = () => async dispatch => {
     const response = await businessNews.get('/top-headlines', {
         params: {
             sources: 'business-insider,the-wall-street-journal',
-            apiKey: 'e43b9bd75f60429d83c267510ede0e74'
+            apiKey: `${process.env.REACT_APP_API_KEY_businessNews}`
         }
     });
     dispatch({ type: BUSINESS_NEWS, payload: response.data.articles })
@@ -54,7 +54,7 @@ export const handleModalClose = () => {
 export const fetchHomeStock = () => async dispatch => {
     const resGain = await IEX.get('/stock/market/list/gainers', {
         params: {
-            token: 'Tsk_9a99bd2bfde342bb9a614405ce41eaf6',
+            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
         }
     }).catch(err => {
         if (err.response) {
@@ -67,12 +67,12 @@ export const fetchHomeStock = () => async dispatch => {
     });
     const resLose = await IEX.get('/stock/market/list/losers', {
         params: {
-            token: 'Tsk_9a99bd2bfde342bb9a614405ce41eaf6',
+            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
         }
     });
     const resActive = await IEX.get('/stock/market/list/mostactive', {
         params: {
-            token: 'Tsk_9a99bd2bfde342bb9a614405ce41eaf6',
+            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
         }
     });
 
@@ -89,7 +89,7 @@ export const fetchHomeStock = () => async dispatch => {
 export const fetchIndices = () => async dispatch => {
     const resIndices = await FM.get('api/v3/quote/%5EGSPC,%5EDJI,%5EIXIC', {
         params: {
-            apikey: 'b126ba1a12f849380cf5010d6725957d',
+            apikey: `${process.env.REACT_APP_API_KEY_FM}`,
         }
     });
 
@@ -102,7 +102,7 @@ export const fetchIndices = () => async dispatch => {
 export const fetchDayChart = (symb) => async dispatch => {
     const resDayChart = await IEX.get(`/stock/${symb}/chart/3y`, {
         params: {
-            token: 'Tsk_bd95bcb47f3f4b1b8e061b1ea86c0b21',
+            token: `${process.env.REACT_APP_API_KEY_IEX2}`,
         }
     });
 
@@ -117,7 +117,7 @@ export const fetchDayChart = (symb) => async dispatch => {
 export const fetchSSQuote = (symb) => async dispatch => {
     const resQuote = await IEX.get(`/stock/${symb}/quote`, {
         params: {
-            token: 'Tpk_2686f6769c314df4b72d32cb961c115c',
+            token: `${process.env.REACT_APP_API_KEY_IEX3}`,
         }
     }).catch(err => {
         if (err.response) {
@@ -146,7 +146,7 @@ export const fetchSSStat = (symb) => async dispatch => {
 
     const resStat = await IEX.get(`/stock/${symb}/stats`, {
         params: {
-            token: 'Tsk_bd95bcb47f3f4b1b8e061b1ea86c0b21',
+            token: `${process.env.REACT_APP_API_KEY_IEX2}`,
         }
     }).catch(err => {
         if (err.response) {
@@ -177,7 +177,7 @@ export const fetchSSNews = (symb) => async dispatch => {
             q: symb,
             sortBy: 'publishedAt',
             language: 'en',
-            apiKey: 'e43b9bd75f60429d83c267510ede0e74'
+            apiKey: `${process.env.REACT_APP_API_KEY_businessNews}`
         }
     });
     dispatch({ type: FETCH_SSNEWS, payload: response.data.articles })
@@ -192,7 +192,7 @@ export const searchSymb = (symb) => async dispatch => {
             market: 'stocks',
             locale: 'us',
             active: true,
-            apiKey: 'KgVsqTE75pOyzqhII7HITcTNNKZrRup6',
+            apiKey: `${process.env.REACT_APP_API_KEY_Polygon}`,
         }
     })
     dispatch({
@@ -201,18 +201,4 @@ export const searchSymb = (symb) => async dispatch => {
     })
 };
 
-export const fetchMinChart = (symb) => async dispatch => {
-    const resMinChart = await IEX.get(`/stock/${symb}/chart/1d`, {
-        params: {
-            token: 'Tsk_987a1026563e417fa348d4a8d78e6463',
-        }
-    });
-
-    dispatch({
-        type: FETCH_MINCHART,
-        payload: {
-            minChart: resMinChart.data,
-        }
-    })
-};
 
