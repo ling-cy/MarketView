@@ -2,30 +2,13 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux'
 
-import { makeStyles } from '@material-ui/core/styles';
-
+import { drawerStyles } from './AppBarStyles'
 import {
-    Drawer, List, ListItem, ListItemText, Toolbar,
+    Drawer, List, ListItem, Toolbar, Typography, Icon
 } from '@material-ui/core';
 
+import ThemeSwitch from './ThemeSwitch'
 import { handleDrawerToggle } from '../../actions'
-
-
-const drawerWidth = 100;
-
-const useStyles = makeStyles(() => ({
-    drawer: {
-        display: 'block',
-        width: drawerWidth,
-        flexShrink: 0,
-    },
-    drawerPaper: {
-        width: drawerWidth,
-    },
-    drawerContainer: {
-        overflow: 'auto',
-    },
-}));
 
 const drawerContent = [
     {
@@ -44,14 +27,11 @@ const AppDrawer = () => {
     const { isDrawerOpen } = useSelector(state => ({
         isDrawerOpen: state.isDrawerOpen.drawerOpen,
     }));
-
     const dispatch = useDispatch();
-
-    const classes = useStyles();
-
+    const classes = drawerStyles();
     const closingDrawer = () => {
         dispatch(handleDrawerToggle(!isDrawerOpen));
-    }
+    };
 
     const drawer = drawerContent.map((page, index) => {
         return (
@@ -60,10 +40,12 @@ const AppDrawer = () => {
                 onClick={closingDrawer}
                 key={index}
             >
-                <ListItemText primary={page.name} />
+                <Typography className={classes.listText}>
+                    {page.name}
+                </Typography>
             </ListItem>
         )
-    })
+    });
 
     return (
         <nav className={classes.drawer} aria-label="app drawer">
@@ -79,7 +61,15 @@ const AppDrawer = () => {
                     keepMounted: true, // Better open performance on mobile.
                 }}
             >
-                <Toolbar />
+                <Toolbar>
+                    <Icon
+                        color="default"
+                        edge="start"
+                        className={classes.themeIcon}
+                    >
+                        <ThemeSwitch />
+                    </Icon>
+                </Toolbar>
                 <div className={classes.drawerContainer} />
                 <List>
                     {drawer}

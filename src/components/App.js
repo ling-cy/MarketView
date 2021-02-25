@@ -7,9 +7,9 @@ import { ThemeProvider } from '@material-ui/styles';
 import { fetchBusinessNews, fetchHomeStock, fetchIndices } from '../actions'
 
 
-import ResponsiveAppBar from './ResponsiveAppBar';
+import ResponsiveAppBar from './ResponsiveAppBar/ResponsiveAppBar';
 import Home from './pages/Home/Home';
-import Search from './pages/SearchResult';
+import Search from './pages/SearchResult/SearchResult';
 import SymbolDetail from './pages/SymbolDetail/SymbolDetail';
 import Footer from './footer/footer'
 
