@@ -1,71 +1,13 @@
 import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import { TableBody, TableContainer, TableHead, TableRow, Paper } from '@material-ui/core';
 import {
-    Table, TableBody, TableCell, TableContainer,
-    TableHead, TableRow, Paper, Typography, withStyles
-} from '@material-ui/core';
-import history from '../../../history'
+    STable, SymbolTableRow, BodyTypography, BodyThTypography,
+    HeadTableCell, CaptionTableCell, SymbolTableCell
+} from './StyledComponent'
+import history from '../../../../history'
 
 
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 350,
-        // maxWidth: 400,
-    },
-
-});
-
-const SymbolTableRow = withStyles(() => ({
-    root: {
-        height: 20,
-    },
-    head: {
-        height: 35,
-    }
-}))(TableRow);
-
-
-
-const BodyTypography = withStyles(() => ({
-    root: {
-        fontSize: '14px',
-        fontWeight: '500',
-    },
-}))(Typography);
-
-const BodyThTypography = withStyles(() => ({
-    root: {
-        fontSize: '13px',
-        fontWeight: '800',
-    },
-}))(Typography);
-
-const HeadTableCell = withStyles(() => ({
-    root: {
-        color: '#9b9b9b',
-        fontSize: '10px',
-    },
-}))(TableCell);
-
-
-const CaptionTableCell = withStyles(() => ({
-    root: {
-        paddingBottom: 2,
-        paddingTop: 0,
-        color: '#468faf',
-        fontSize: '10px',
-        borderTop: 'none',
-    },
-}))(TableCell);
-
-const SymbolTableCell = withStyles(() => ({
-    root: {
-        paddingBottom: 0,
-        paddingTop: 2,
-        borderBottom: 'none',
-    },
-}))(TableCell);
 
 const createData = (symbol, lastPrice, change, pChange, company) => {
     return { symbol, lastPrice, change, pChange, company };
@@ -96,17 +38,13 @@ const change = (value) => {
 
 
 const StockTable = (props) => {
-    const classes = useStyles();
     const rows = props.stockSymbols.slice(0, 5).map((symbol) => {
         return createData(`${symbol.symbol}`, `${symbol.iexClose}`, `${symbol.change}`, `${symbol.changePercent}`, `${symbol.companyName}`)
     })
 
-
-
     return (
-        // <MuiThemeProvider theme={theme}>
         <TableContainer component={Paper}>
-            <Table className={classes.table} size="small" aria-label="stock table">
+            <STable size='small'>
                 <TableHead>
                     <TableRow>
                         <HeadTableCell >Symbol</HeadTableCell>
@@ -142,10 +80,9 @@ const StockTable = (props) => {
                         </React.Fragment>
                     ))}
                 </TableBody>
-            </Table>
+            </STable>
         </TableContainer>
-        // </MuiThemeProvider>
-    );
+    )
 };
 
 export default StockTable;

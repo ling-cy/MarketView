@@ -7,10 +7,10 @@ import { Paper, Grid, CircularProgress, Typography } from '@material-ui/core';
 
 import { homeStyles } from './homeStyles'
 import { handleModalOpen, handleModalClose } from '../../../actions';
-import NewsCard from '../News/NewsCard';
-import NewsPortal from '../News/NewsPortal';
-import StockTable from './StockTable'
-import IndexBox from './IndexBox'
+import NewsCard from '../News/NewsCard/NewsCard';
+import NewsPortal from '../News/NewsPortal/NewsPortal';
+import StockTable from './StockTable/StockTable'
+import IndexBox from './IndexBox/IndexBox'
 
 class Home extends React.Component {
 

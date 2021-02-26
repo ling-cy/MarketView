@@ -1,9 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core';
-import { fetchSSNews, handleModalOpen } from '../../../actions';
-import NewsCard from '../News/NewsCard';
-import NewsPortal from '../News/NewsPortal';
+import { handleModalOpen } from '../../../actions';
+import NewsCard from '../News/NewsCard/NewsCard';
+import NewsPortal from '../News/NewsPortal/NewsPortal';
 
 
 class SSNews extends React.Component {
