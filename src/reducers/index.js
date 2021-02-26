@@ -12,7 +12,7 @@ import errorReducer from './errorReducer';
 
 export default combineReducers(
     {
-        fetchData: fetchNewsDataReducer,
+        fetchNews: fetchNewsDataReducer,
         theme: themeReducer,
         isDrawerOpen: drawerReducer,
         modal: modalReducer,

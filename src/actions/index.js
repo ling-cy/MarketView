@@ -10,14 +10,19 @@ import FM from '../apis/financialModelingAPI'
 import Polygon from '../apis/polygonioAPI'
 import history from '../history';
 
+import { fetchNewsError, fetchChartError } from './error'
+
 
 export const fetchBusinessNews = () => async dispatch => {
     const response = await businessNews.get('/top-headlines', {
         params: {
             sources: 'business-insider,the-wall-street-journal',
-            apiKey: `${process.env.REACT_APP_API_KEY_businessNews}`
+            apiKey: process.env.REACT_APP_API_KEY_businessNews
         }
-    })
+    }).catch(
+        dispatch({ type: BUSINESS_NEWS, payload: fetchNewsError })
+    )
+
     dispatch({ type: BUSINESS_NEWS, payload: response.data.articles })
 };
 
@@ -54,17 +59,17 @@ export const handleModalClose = () => {
 export const fetchHomeStock = () => async dispatch => {
     const resGain = await IEX.get('/stock/market/list/gainers', {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
+            token: process.env.REACT_APP_API_KEY_IEX1,
         }
     })
     const resLose = await IEX.get('/stock/market/list/losers', {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
+            token: process.env.REACT_APP_API_KEY_IEX1,
         }
     });
     const resActive = await IEX.get('/stock/market/list/mostactive', {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX1}`,
+            token: process.env.REACT_APP_API_KEY_IEX1,
         }
     });
 
@@ -81,9 +86,9 @@ export const fetchHomeStock = () => async dispatch => {
 export const fetchIndices = () => async dispatch => {
     const resIndices = await FM.get('api/v3/quote/%5EGSPC,%5EDJI,%5EIXIC', {
         params: {
-            apikey: `${process.env.REACT_APP_API_KEY_FM}`,
+            apikey: process.env.REACT_APP_API_KEY_FM,
         }
-    });
+    })
 
     dispatch({
         type: FETCH_INDICES,
@@ -94,7 +99,7 @@ export const fetchIndices = () => async dispatch => {
 export const fetchDayChart = (symb) => async dispatch => {
     const resDayChart = await IEX.get(`/stock/${symb}/chart/3y`, {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX2}`,
+            token: process.env.REACT_APP_API_KEY_IEX2,
         }
     });
 
@@ -109,7 +114,7 @@ export const fetchDayChart = (symb) => async dispatch => {
 export const fetchSSQuote = (symb) => async dispatch => {
     const resQuote = await IEX.get(`/stock/${symb}/quote`, {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX3}`,
+            token: process.env.REACT_APP_API_KEY_IEX3,
         }
     }).catch(err => {
         if (err.response) {
@@ -133,7 +138,7 @@ export const fetchSSStat = (symb) => async dispatch => {
 
     const resStat = await IEX.get(`/stock/${symb}/stats`, {
         params: {
-            token: `${process.env.REACT_APP_API_KEY_IEX2}`,
+            token: process.env.REACT_APP_API_KEY_IEX2,
         }
     }).catch(err => {
         if (err.response) {
@@ -159,10 +164,14 @@ export const fetchSSNews = (symb) => async dispatch => {
             q: symb,
             sortBy: 'publishedAt',
             language: 'en',
-            apiKey: `${process.env.REACT_APP_API_KEY_businessNews}`
+            apiKey: process.env.REACT_APP_API_KEY_businessNews,
         }
-    });
-    dispatch({ type: FETCH_SSNEWS, payload: response.data.articles })
+    }).catch(
+        dispatch({ type: FETCH_SSNEWS, payload: fetchNewsError })
+    )
+    if (response !== undefined) {
+        dispatch({ type: FETCH_SSNEWS, payload: response.data.articles })
+    }
 };
 
 export const searchSymb = (symb) => async dispatch => {
@@ -174,7 +183,7 @@ export const searchSymb = (symb) => async dispatch => {
             market: 'stocks',
             locale: 'us',
             active: true,
-            apiKey: `${process.env.REACT_APP_API_KEY_Polygon}`,
+            apiKey: process.env.REACT_APP_API_KEY_Polygon,
         }
     })
     dispatch({
