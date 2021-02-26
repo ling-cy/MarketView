@@ -52,6 +52,10 @@ export const homeStyles = (theme) => ({
     },
     paper: {
         margin: theme.spacing(0, 0, 1, 0),
+        maxWidth: 1050,
+        display: 'block',
+        marginLeft: 'auto',
+        marginRight: 'auto'
     },
     header: {
         fontWeight: 300,

@@ -23,8 +23,5 @@ export const StyledTableCell = withStyles((theme) => ({
         borderLeft: 'solid',
         borderWidth: '2px',
         fontWeight: '500',
-        [theme.breakpoints.down('xs')]: {
-            border: 'none',
-        },
     },
 }))(TableCell);

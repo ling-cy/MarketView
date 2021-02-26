@@ -106,7 +106,7 @@ class Home extends React.Component {
             <Grid
                 container
                 direction='row'
-                justify='space-around'
+                justify='center'
                 alignments='flex-start'
             >
                 {indices.map((data, index) => {
@@ -127,6 +127,9 @@ class Home extends React.Component {
         return (
             <main className={classes.content}>
                 <div className={classes.toolbar} />
+                <Paper className={classes.paper} >
+                    {this.renderIndices()}
+                </Paper>
                 <Grid className={classes.masterGrid}
                     container
                     spacing={1}
@@ -134,26 +137,20 @@ class Home extends React.Component {
                     justify='flex-start'
                     alignItems='center'
                 >
-                    <Grid item xs={12} className={classes.panel}>
-                        <Paper className={classes.paper}>
-                            {this.renderIndices()}
-                        </Paper>
-                    </Grid>
-                    <Grid item>
-                        <Grid container spacing={1} className={classes.panel}>
-                            <Grid item sm={7} xs={12} className={classes.newsPanel}>
-                                <Typography variant="h6" className={classes.header}>Latest Business News</Typography>
-                                <Paper className={classes.paper}>
-                                    {this.renderBusinessNews()}
-                                </Paper>
-                            </Grid>
-                            <Grid item sm={5} xs={12}>
-                                {this.renderStockPanel()}
-                            </Grid>
+                    <Grid container spacing={1} className={classes.panel}>
+                        <Grid item sm={7} xs={12} className={classes.newsPanel}>
+                            <Typography variant="h6" className={classes.header}>Latest Business News</Typography>
+                            <Paper className={classes.paper}>
+                                {this.renderBusinessNews()}
+                            </Paper>
+                        </Grid>
+                        <Grid item sm={5} xs={12}>
+                            {this.renderStockPanel()}
                         </Grid>
                     </Grid>
                 </Grid>
-            </main>
+                {/* </Grid> */}
+            </main >
         )
     }
 };

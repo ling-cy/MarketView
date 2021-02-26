@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 
 import CanvasJSReact from './assets/canvasjs.stock.react';
 let CanvasJS = CanvasJSReact.CanvasJS;
@@ -8,20 +8,17 @@ const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 const risingColor = '#2a9d8f';
 const fallingColor = '#e63946';
 
-
 const Chart = (props) => {
-
+    const { stockData } = props;
     const { darkTheme } = useSelector(state => ({
         darkTheme: state.theme.darkMode,
     }));
-
     const [dataPoints1, setDataPoints1] = useState([]);
     const [dataPoints2, setDataPoints2] = useState([]);
     const [dataPoints3, setDataPoints3] = useState([]);
     const [isLoaded, setIsloaded] = useState(false);
     const [lineBreak, setLineBreak] = useState([]);
     const [ma, setMa] = useState([]);
-
 
     useEffect(() => {
 
@@ -114,16 +111,10 @@ const Chart = (props) => {
                 sma(dps1, 30, 'MA30', '#1c77c3'),
                 sma(dps1, 60, 'MA60', '#97d8c4'),
             ]
-            // maLine.push(sma(dps1, 5, 'MA5', '#f39237'));
-            // maLine.push(sma(dps1, 10, 'MA10', '#40bcd8'));
-            // maLine.push(sma(dps1, 20, 'MA20', '#b388eb'));
-            // maLine.push(sma(dps1, 30, 'MA30', '#1c77c3'));
-            // maLine.push(sma(dps1, 60, 'MA60', '#97d8c4'));
 
             setMa(maLine);
         };
-        loadData(props.stockData);
-
+        loadData(stockData)
         return () => {
             setDataPoints1([]);
             setDataPoints2([]);
@@ -131,9 +122,8 @@ const Chart = (props) => {
             setIsloaded(false);
             setLineBreak([]);
             setMa([]);
-            console.log({ dataPoints1, dataPoints2, dataPoints3, isLoaded, lineBreak, ma })
         };
-    }, []);
+    }, [stockData]);
 
 
     const gridColor = darkTheme === false ? '#ced4da' : '#939597';
@@ -397,7 +387,5 @@ const Chart = (props) => {
     );
 
 }
-
-
 
 export default Chart; 

@@ -11,7 +11,6 @@ class SSNews extends React.Component {
 
     renderNews() {
         const news = this.props.news;
-        console.log(news)
         if (!news || news === null) {
             return <Typography style={{ textAlign: 'center' }}>Loading...</Typography>
         } if (news.status === 'error') {
