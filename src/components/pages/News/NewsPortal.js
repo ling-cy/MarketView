@@ -74,6 +74,9 @@ class NewsPortal extends React.Component {
     render() {
         const { classes } = this.props;
         const article = this.props.articles[this.props.modalState.index];
+        if (!article || article === undefined) {
+            return null;
+        }
         return (
             <Modal
                 open={this.props.modalState.isModalOpen}
@@ -87,7 +90,6 @@ class NewsPortal extends React.Component {
                         component='img'
                         alt='News Image'
                         image={article.urlToImage}
-                        title='Contemplative Reptile'
                         className={classes.cover}
                     />
                     <CardContent className={classes.cardContent}>

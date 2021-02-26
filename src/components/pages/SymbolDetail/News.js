@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux'
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { fetchSSNews, handleModalOpen } from '../../../actions';
 import NewsCard from '../News/NewsCard';
 import NewsPortal from '../News/NewsPortal';
@@ -8,17 +8,14 @@ import NewsPortal from '../News/NewsPortal';
 
 class SSNews extends React.Component {
 
-    componentDidMount() {
-        this.props.fetchSSNews(this.props.symb);
-    }
 
     renderNews() {
         const news = this.props.news;
+        console.log(news)
         if (!news || news === null) {
-            return (
-                <div>
-                    Loading ...
-                </div>)
+            return <Typography style={{ textAlign: 'center' }}>Loading...</Typography>
+        } if (news.status === 'error') {
+            return <Typography style={{ textAlign: 'center' }}>{news.response}</Typography>
         }
         return (
             <React.Fragment>
@@ -31,7 +28,6 @@ class SSNews extends React.Component {
                                 newsImg={item.urlToImage}
                                 pTime={item.publishedAt}
                             />
-
                         </div>
                     )
                 })}
@@ -51,9 +47,7 @@ class SSNews extends React.Component {
                     alignItems='center'
                 >
                     <Grid item >
-
                         {this.renderNews()}
-
                     </Grid>
                 </Grid>
             </div>
@@ -69,5 +63,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { fetchSSNews, handleModalOpen }
+    { handleModalOpen }
 )(SSNews);

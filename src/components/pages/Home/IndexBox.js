@@ -1,26 +1,36 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import {
+    rgbToHex,
     Table, TableBody, TableCell, TableRow, withStyles
 } from '@material-ui/core';
 
-const useStyles = makeStyles({
-    table: {
-        minWidth: 170,
-    },
-
-});
-
-const StyledTableCell = withStyles(() => ({
+const ITable = withStyles((theme) => ({
     root: {
-        paddingBottom: 1,
-        paddingTop: 1,
+        minWidth: 170,
+        height: '100%',
+        [theme.breakpoints.down('xs')]: {
+            borderWidth: '4px 0 0 0',
+            borderStyle: 'solid',
+            borderColor: 'rgb(0,0,0,0.1)'
+        },
+
+    },
+}))(Table);
+
+const StyledTableCell = withStyles((theme) => ({
+    root: {
+        paddingBottom: 3,
+        paddingTop: 3,
         fontSize: '13px',
         borderTop: 'none',
         borderBottom: 'none',
         borderLeft: 'solid',
         borderWidth: '2px',
-        fontWeight: '600',
+        fontWeight: '500',
+        [theme.breakpoints.down('xs')]: {
+            border: 'none',
+        },
     },
 }))(TableCell);
 
@@ -30,11 +40,10 @@ const textColor = (value) => {
     } if (value < 0) {
         return '#e63946';
     }
-    return 'black';
+    return '#888888';
 };
 
 const IndexBox = (props) => {
-    const classes = useStyles();
     const index = props.marketIndex
 
     const show = (value) => {
@@ -45,7 +54,7 @@ const IndexBox = (props) => {
 
     return (
         <React.Fragment>
-            <Table className={classes.table}>
+            <ITable>
                 <TableBody>
                     <TableRow>
                         <StyledTableCell>{index.name}</StyledTableCell>
@@ -59,7 +68,7 @@ const IndexBox = (props) => {
                             ({show(index.changesPercentage)}%)</StyledTableCell>
                     </TableRow>
                 </TableBody>
-            </Table>
+            </ITable>
 
         </React.Fragment>
     );

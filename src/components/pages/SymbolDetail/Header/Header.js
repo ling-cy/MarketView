@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { fetchSSQuote, fetchSSStat } from '../../../../actions'
+import { fetchSSQuote, fetchSSStat, fetchSSNews } from '../../../../actions'
 
 import PropTypes from 'prop-types';
 import { HeaderA, HeaderB, HeaderC, HeaderD, HeaderE, HContainer } from './StyledComponent'
@@ -35,6 +35,7 @@ class Header extends React.Component {
     componentDidMount() {
         this.props.fetchSSQuote(this.props.symb);
         this.props.fetchSSStat(this.props.symb);
+        this.props.fetchSSNews(this.props.symb);
     }
 
     renderHeader() {
@@ -95,5 +96,5 @@ Header.propTypes = {
 
 export default connect(
     mapStateToProps,
-    { fetchSSQuote, fetchSSStat }
+    { fetchSSQuote, fetchSSStat, fetchSSNews }
 )(Header);

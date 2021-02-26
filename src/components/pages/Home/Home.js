@@ -2,78 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import PropTypes from 'prop-types';
-import { createMuiTheme, responsiveFontSizes, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 import { Paper, Grid, CircularProgress, Typography } from '@material-ui/core';
 
-
+import { homeStyles } from './homeStyles'
 import { handleModalOpen, handleModalClose } from '../../../actions';
 import NewsCard from '../News/NewsCard';
 import NewsPortal from '../News/NewsPortal';
 import StockTable from './StockTable'
 import IndexBox from './IndexBox'
 
-
-let theme = createMuiTheme();
-theme = responsiveFontSizes(theme);
-
-
-const styles = (theme) => ({
-    toolbar: theme.mixins.toolbar,
-    content: {
-        padding: theme.spacing(1),
-    },
-
-    cir: {
-        '& > * + *': {
-            marginLeft: theme.spacing(2),
-        },
-        padding: theme.spacing(5),
-        display: 'block',
-        marginLeft: 'auto',
-        marginRight: 'auto',
-    },
-    modalStyle: {
-        position: 'absolute',
-        width: '100 %',
-        backgroundColor: theme.palette.background.paper,
-        border: '2px solid #000',
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(2, 4, 3),
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        outline: 0,
-    },
-    stockPanel: {
-        minWidth: 300,
-    },
-    newsPanel: {
-        maxWidth: 850,
-    },
-    indicesPanel: {
-        maxWidth: 1250,
-    },
-    spHeader: {
-        fontWeight: '600',
-        fontSize: '14px',
-        padding: theme.spacing(0, 0, 0, 1),
-    },
-    paper: {
-        margin: theme.spacing(0, 0, 1, 0),
-    }
-});
-
-
 class Home extends React.Component {
 
     renderBusinessNews() {
-        const { classes } = this.props;
         const articles = this.props.businessNews.articles;
         if (!articles || articles === null) {
-            return (
-                <div className={classes.cir}>
-                    <CircularProgress />
-                </div>)
+            return (<Typography style={{ textAlign: 'center' }}>Loading...</Typography>)
+        } if (articles.status === 'error') {
+            return <Typography style={{ textAlign: 'center' }}>{articles.response}</Typography>
         }
         return (
             <React.Fragment>
@@ -95,79 +41,81 @@ class Home extends React.Component {
         )
     }
 
-
-    renderGainer() {
+    renderStockPanel() {
         const { classes } = this.props;
-        const data = this.props.stockHome.gainers;
-        if (!data || data === null) {
-            return (
-                <div className={classes.cir}>
-                    <CircularProgress />
-                </div>)
-        };
+        const stockPanelContent = [
+            {
+                name: 'Most Actives',
+                data: this.props.stockHome.active,
+            }, {
+                name: 'Gainers',
+                data: this.props.stockHome.gainers,
+            }, {
+                name: 'Losers',
+                data: this.props.stockHome.losers,
+            }
+        ];
         return (
-            <StockTable
-                stockSymbols={data}
-            />
-        );
-    };
 
-    renderLoser() {
-        const { classes } = this.props;
-        const data = this.props.stockHome.losers;
-        if (!data || data === null) {
-            return (
-                <div className={classes.cir}>
-                    <CircularProgress />
-                </div>)
-        };
-        return (
-            <StockTable
-                stockSymbols={data}
-            />
-        );
-    };
+            <Grid
+                container
+                direction='column'
+                justify='flex-start'
+                alignItems='center'
+            >
+                <Typography variant="h6" className={classes.header}>What's Moving</Typography>
+                {stockPanelContent.map((panel, index) => {
+                    const data = panel.data;
+                    if (!data || data === null) {
+                        return (
+                            <Paper className={classes.paper}>
+                                <div className={classes.cir} key={index}>
+                                    <CircularProgress />
+                                </div>
+                            </Paper>
+                        )
+                    }
+                    return (
+                        <Grid item sm={12} xs={12} className={classes.stockPanel}>
+                            <Paper className={classes.paper}>
+                                <Typography className={classes.spHeader}>Stocks: {panel.name}</Typography>
+                                <StockTable
+                                    stockSymbols={data}
+                                    key={index}
+                                />
+                            </Paper>
+                        </Grid>
+                    )
+                })}
+            </Grid>
 
-    renderActive() {
-        const { classes } = this.props;
-        const data = this.props.stockHome.active;
-        if (!data || data === null) {
-            return (
-                <div className={classes.cir}>
-                    <CircularProgress />
-                </div>)
-        };
-        return (
-            <StockTable
-                stockSymbols={data}
-            />
-        );
-    };
+        )
+    }
+
 
     renderIndices() {
-        const { classes } = this.props;
         const indices = this.props.indices;
-        console.log(indices)
         if (!indices || indices === null) {
-            return (
-                <div className={classes.cir}>
-                    <CircularProgress />
-                </div>)
-        };
+            return (<Typography style={{ textAlign: 'center' }}>Loading...</Typography>)
+        }
+        //the error response is not an array so its length is undefined
+        if (indices.length === undefined) {
+            return null;
+        }
         return (
             <Grid
                 container
                 direction='row'
-                justify='space-evenly'
+                justify='space-around'
                 alignments='flex-start'
             >
                 {indices.map((data, index) => {
                     return (
-                        <div key={index}>
+                        <Grid item xs={12} sm={4} key={index}>
                             <IndexBox
                                 marketIndex={data}
                             />
-                        </div>
+                        </Grid>
                     )
                 })}
             </Grid>
@@ -179,39 +127,29 @@ class Home extends React.Component {
         return (
             <main className={classes.content}>
                 <div className={classes.toolbar} />
-                <Grid
+                <Grid className={classes.masterGrid}
                     container
                     spacing={1}
                     direction='column'
                     justify='flex-start'
                     alignItems='center'
                 >
-                    <Grid item xs={12} className={classes.indicesPanel}>
+                    <Grid item xs={12} className={classes.panel}>
                         <Paper className={classes.paper}>
                             {this.renderIndices()}
                         </Paper>
                     </Grid>
-                    <Grid item container spacing={1} className={classes.indicesPanel}>
-                        <Grid item className={classes.newsPanel}>
-                            <Typography variant="h5"><b>Latest</b></Typography>
-                            <Paper className={classes.paper}>
-                                {this.renderBusinessNews()}
-                            </Paper>
-                        </Grid>
-                        <Grid item className={classes.stockPanel}>
-                            <Typography variant="h5"><b>What's Moving</b></Typography>
-                            <Paper className={classes.paper}>
-                                <Typography className={classes.spHeader}>Stocks: Most Actives</Typography>
-                                {this.renderActive()}
-                            </Paper>
-                            <Paper className={classes.paper}>
-                                <Typography className={classes.spHeader}>Stocks: Gainers</Typography>
-                                {this.renderGainer()}
-                            </Paper>
-                            <Paper className={classes.paper}>
-                                <Typography className={classes.spHeader}>Stocks: Losers</Typography>
-                                {this.renderLoser()}
-                            </Paper>
+                    <Grid item>
+                        <Grid container spacing={1} className={classes.panel}>
+                            <Grid item sm={7} xs={12} className={classes.newsPanel}>
+                                <Typography variant="h6" className={classes.header}>Latest Business News</Typography>
+                                <Paper className={classes.paper}>
+                                    {this.renderBusinessNews()}
+                                </Paper>
+                            </Grid>
+                            <Grid item sm={5} xs={12}>
+                                {this.renderStockPanel()}
+                            </Grid>
                         </Grid>
                     </Grid>
                 </Grid>
@@ -226,19 +164,15 @@ Home.propTypes = {
 
 const mapStateToProps = (state) => {
     return {
-        businessNews: state.fetchData,
+        businessNews: state.fetchNews,
         modalState: state.modal,
         indices: state.indices.indices,
         stockHome: state.stockHome,
     }
 }
 
-export default withStyles(styles)(
+export default withStyles(homeStyles)(
     connect(
         mapStateToProps,
         { handleModalOpen, handleModalClose }
     )(Home));
-
-
-
-    // this.props.businessNews.articles.slice(0, 3).map(news => {

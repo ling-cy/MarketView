@@ -10,7 +10,7 @@ import history from '../../../history'
 
 const useStyles = makeStyles({
     table: {
-        minWidth: 300,
+        minWidth: 350,
         // maxWidth: 400,
     },
 
