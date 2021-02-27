@@ -17,9 +17,6 @@ const drawerContent = [
     }, {
         name: 'Search',
         link: '/search',
-    }, {
-        name: 'Contact',
-        link: '/contact',
     },
 ]
 
