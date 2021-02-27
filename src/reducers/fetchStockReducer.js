@@ -1,6 +1,6 @@
-import { FETCH_DAYCHART, FETCH_SSQUOTE, FETCH_SSSTAT, ERROR, FETCH_SSNEWS } from '../actions/types';
+import { FETCH_DAYCHART, FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS } from '../actions/types';
 
-export default (state = {}, action) => {
+const fetchStockReducer = (state = {}, action) => {
     switch (action.type) {
         case FETCH_DAYCHART:
             return { ...state, dayChart: action.payload.dayChart };
@@ -14,3 +14,5 @@ export default (state = {}, action) => {
             return state;
     }
 }
+
+export default fetchStockReducer;

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
 };
 
 
-export default (state = INITIAL_STATE, action) => {
+const drawerReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case DRAWER_TOGGLE:
             return { drawerOpen: action.isDrawerOpen };
@@ -13,3 +13,5 @@ export default (state = INITIAL_STATE, action) => {
             return state;
     };
 };
+
+export default drawerReducer;

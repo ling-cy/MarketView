@@ -1,6 +1,6 @@
 import { FETCH_HOMESTOCK } from '../actions/types';
 
-export default (state = {}, action) => {
+const stockHomeReducer = (state = {}, action) => {
     switch (action.type) {
         case FETCH_HOMESTOCK:
             return {
@@ -13,3 +13,5 @@ export default (state = {}, action) => {
             return state;
     }
 }
+
+export default stockHomeReducer;

@@ -5,7 +5,7 @@ const INITIAL_STATE = {
     index: 0
 };
 
-export default (state = INITIAL_STATE, action) => {
+const modalReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case OPEN_MODAL:
             return { ...state, isModalOpen: true, index: action.payload };
@@ -14,5 +14,7 @@ export default (state = INITIAL_STATE, action) => {
         default:
             return state;
     }
-};
+}
+
+export default modalReducer;
 

@@ -1,6 +1,6 @@
 import { BUSINESS_NEWS } from '../actions/types';
 
-export default (state = {}, action) => {
+const fetchNewsDataReducer = (state = {}, action) => {
     switch (action.type) {
         case BUSINESS_NEWS:
             return { ...state, articles: action.payload };
@@ -8,3 +8,5 @@ export default (state = {}, action) => {
             return state;
     }
 }
+
+export default fetchNewsDataReducer;

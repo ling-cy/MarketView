@@ -1,6 +1,6 @@
 import { FETCH_INDICES } from '../actions/types';
 
-export default (state = {}, action) => {
+const indicesReducer = (state = {}, action) => {
     switch (action.type) {
         case FETCH_INDICES:
             return {
@@ -10,4 +10,6 @@ export default (state = {}, action) => {
         default:
             return state;
     }
-};
+}
+
+export default indicesReducer;

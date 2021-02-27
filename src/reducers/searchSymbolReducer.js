@@ -1,6 +1,6 @@
 import { SEARCH_SYMBOL } from '../actions/types';
 
-export default (state = {}, action) => {
+const searchSymbolReducer = (state = {}, action) => {
     switch (action.type) {
         case SEARCH_SYMBOL:
             return { ...state, result: action.payload };
@@ -8,3 +8,5 @@ export default (state = {}, action) => {
             return state;
     }
 }
+
+export default searchSymbolReducer;

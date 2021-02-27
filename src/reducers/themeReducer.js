@@ -6,11 +6,13 @@ const INITIAL_STATE = {
 };
 
 
-export default (state = INITIAL_STATE, action) => {
+const themeReducer = (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case DARK_MODE:
             return { darkMode: action.isDarkModeOn };
         default:
             return state;
     }
-};
+}
+
+export default themeReducer;
