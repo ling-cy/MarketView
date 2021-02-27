@@ -3,7 +3,7 @@ import React from 'react';
 import { StyledTab, StyledTabs, TContainer, TabPanel, a11yProps } from './TabStyledComponent';
 import Chart from '../Chart/Chart';
 import Quote from '../Quote/Quote';
-import News from '../News';
+import News from '../News/SSNews';
 import Discussion from '../Discussion/Discussion';
 
 

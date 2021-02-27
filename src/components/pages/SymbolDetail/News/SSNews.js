@@ -1,20 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Grid, Typography } from '@material-ui/core';
-import { handleModalOpen } from '../../../actions';
-import NewsCard from '../News/NewsCard/NewsCard';
-import NewsPortal from '../News/NewsPortal/NewsPortal';
+import { handleModalOpen } from '../../../../actions';
+import NewsCard from '../../News/NewsCard/NewsCard';
+import NewsPortal from './SSNewsPortal';
 
 
 class SSNews extends React.Component {
 
 
     renderNews() {
-        const news = this.props.news;
+        const { news } = this.props;
         if (!news || news === null) {
             return <Typography style={{ textAlign: 'center' }}>Loading...</Typography>
         } if (news.status === 'error') {
             return <Typography style={{ textAlign: 'center' }}>{news.response}</Typography>
+        } if (news === []) {
+            return <Typography style={{ textAlign: 'center' }}>No relevant news...</Typography>
         }
         return (
             <React.Fragment>
@@ -23,14 +25,16 @@ class SSNews extends React.Component {
                         <div key={index} onClick={() => { this.props.handleModalOpen(index) }} >
                             <NewsCard
                                 newsTitle={item.title}
-                                newsSource={item.source.name}
-                                newsImg={item.urlToImage}
-                                pTime={item.publishedAt}
+                                newsSource={item.source}
+                                newsImg={item.image_url}
+                                pTime={item.published_at}
                             />
                         </div>
                     )
                 })}
-                <NewsPortal articles={news} />
+                <NewsPortal
+                    articles={news}
+                />
             </React.Fragment >
         )
     }
@@ -57,6 +61,7 @@ class SSNews extends React.Component {
 const mapStateToProps = (state) => {
     return {
         news: state.stock.resNews,
+        modalState: state.modal,
     }
 }
 
