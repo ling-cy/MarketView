@@ -4,7 +4,8 @@ import {
     FETCH_HOMESTOCK, FETCH_INDICES, FETCH_DAYCHART, ERROR,
     FETCH_SSQUOTE, FETCH_SSSTAT, FETCH_SSNEWS, SEARCH_SYMBOL
 } from './types';
-import businessNews from '../apis/newsAPI';
+import businessNews from '../apis/nytAPI';
+import ssNews from '../apis/marketauxAPI';
 import IEX from '../apis/iexAPI';
 import FM from '../apis/financialModelingAPI'
 import Polygon from '../apis/polygonioAPI'
@@ -14,16 +15,15 @@ import { fetchNewsError } from './error'
 
 
 export const fetchBusinessNews = () => async dispatch => {
-    const response = await businessNews.get('/top-headlines', {
+    const response = await businessNews.get('topstories/v2/business.json', {
         params: {
-            sources: 'business-insider,the-wall-street-journal',
-            apiKey: process.env.REACT_APP_API_KEY_BUSINESSNEWS
+            'api-key': process.env.REACT_APP_API_KEY_BUSINESSNEWS
         }
     }).catch(
         dispatch({ type: BUSINESS_NEWS, payload: fetchNewsError })
     )
 
-    dispatch({ type: BUSINESS_NEWS, payload: response.data.articles })
+    dispatch({ type: BUSINESS_NEWS, payload: response.data.results })
 };
 
 export const darkModeOn = (isDarkModeOn) => {
@@ -153,18 +153,17 @@ export const fetchSSStat = (symb) => async dispatch => {
 }
 
 export const fetchSSNews = (symb) => async dispatch => {
-    const response = await businessNews.get('/everything', {
+    const response = await ssNews.get('/news/all', {
         params: {
-            q: symb,
-            sortBy: 'publishedAt',
-            language: 'en',
-            apiKey: process.env.REACT_APP_API_KEY_BUSINESSNEWS,
+            symbols: symb,
+            filter_entities: true,
+            api_token: process.env.REACT_APP_API_KEY_SSNEWS,
         }
     }).catch(
         dispatch({ type: FETCH_SSNEWS, payload: fetchNewsError })
     )
     if (response !== undefined) {
-        dispatch({ type: FETCH_SSNEWS, payload: response.data.articles })
+        dispatch({ type: FETCH_SSNEWS, payload: response.data.data })
     }
 };
 
