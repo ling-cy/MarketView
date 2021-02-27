@@ -25,16 +25,10 @@ export const drawerStyles = makeStyles((theme) => ({
 
 export const searchBarStyles = makeStyles((theme) => ({
     searchIcon: {
-        padding: theme.spacing(0, 2),
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
         display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        [theme.breakpoints.down('xs')]: {
-            display: 'none',
-        },
+        position: 'absolute',
+        right: 5,
+        top: 6,
     },
     search: {
         position: 'relative',
@@ -43,9 +37,11 @@ export const searchBarStyles = makeStyles((theme) => ({
         '&:hover': {
             backgroundColor: fade(theme.palette.common.black, 0.25),
         },
-        marginRight: theme.spacing(6),
+        marginRight: '60px',
         marginLeft: 0,
-        width: '200px',
+        width: '100%',
+        maxWidth: '23ch',
+
         [theme.breakpoints.up('sm')]: {
             marginLeft: theme.spacing(3),
             width: 'auto',
@@ -55,32 +51,26 @@ export const searchBarStyles = makeStyles((theme) => ({
         color: 'inherit',
     },
     inputInput: {
-        paddingTop: theme.spacing(1),
-        paddingBottom: theme.spacing(1),
-        paddingRight: theme.spacing(1),
-        // vertical padding + font size from searchIcon
-        paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+        padding: theme.spacing(1, 4, 1, 2),
         transition: theme.transitions.create('width'),
         width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: '20ch',
-        },
-        [theme.breakpoints.down('xs')]: {
-            paddingLeft: '1em',
+        [theme.breakpoints.up('sm')]: {
+            width: '15ch',
         },
     },
 }));
 
 export const appBarStyles = makeStyles((theme) => ({
+
     logoL: {
         maxWidth: "150px",
-        padding: theme.spacing(1),
+        padding: theme.spacing(1, 2, 1, 1),
 
     },
     appBarIcon: {
         display: 'flex',
         position: 'absolute',
-        right: 20,
+        right: 15,
     },
     menuIcon: {
         margin: 10,
@@ -91,4 +81,7 @@ export const appBarStyles = makeStyles((theme) => ({
             display: 'none',
         },
     },
+    emptyBox: {
+
+    }
 }));

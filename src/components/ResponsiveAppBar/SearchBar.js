@@ -21,12 +21,11 @@ const SearchBar = () => {
     }
     return (
         <div className={classes.search}>
+
             <div className={classes.searchIcon}>
                 <SearchIcon />
             </div>
-
             <InputBase
-                placeholder="SEARCH..."
                 classes={{
                     root: classes.inputRoot,
                     input: classes.inputInput,
@@ -35,9 +34,9 @@ const SearchBar = () => {
                 onChange={e => {
                     setInput(e.target.value)
                 }}
-                // value={this.props.inValue}
                 onKeyPress={handleKeyPress}
             />
+
 
         </div>)
 };

@@ -12,7 +12,7 @@ export const HeaderA = withStyles(() => ({
 export const HeaderB = withStyles(() => ({
     root: {
         fontWeight: 1000,
-        fontSize: '38px',
+        fontSize: '34px',
         letterSpacing: '-1px',
     },
 }))(Typography);
@@ -20,7 +20,7 @@ export const HeaderB = withStyles(() => ({
 export const HeaderC = withStyles(() => ({
     root: {
         fontWeight: 500,
-        fontSize: '28px',
+        fontSize: '24px',
         letterSpacing: '-0.75px',
     },
 }))(Typography);
