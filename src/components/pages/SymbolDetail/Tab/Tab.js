@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { StyledTab, StyledTabs, TContainer, TabPanel, a11yProps } from './StyledComponent';
-import CallingDayChart from '../Chart/CallingDayChart';
+import { StyledTab, StyledTabs, TContainer, TabPanel, a11yProps } from './TabStyledComponent';
+import Chart from '../Chart/Chart';
 import Quote from '../Quote/Quote';
 import News from '../News';
 import Discussion from '../Discussion/Discussion';
@@ -20,7 +20,7 @@ export default function ScrollableTabsButtonAuto(props) {
             content: <Quote symb={props.symb} />,
         }, {
             tabName: 'Day Chart',
-            content: <CallingDayChart symb={props.symb} />,
+            content: <Chart symb={props.symb} />,
         }, {
             tabName: 'News',
             content: <News symb={props.symb} />,

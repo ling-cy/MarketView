@@ -1,11 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { fetchDayChart } from '../../../../actions';
-import DayChart from './DayChart';
+import CanvasjsDayChart from './CanvasjsDayChart';
 
 
 
-class CallingDayChart extends React.Component {
+class Chart extends React.Component {
 
     componentDidMount() {
         this.props.fetchDayChart(this.props.symb);
@@ -18,7 +18,7 @@ class CallingDayChart extends React.Component {
             return 'Loading...'
         }
         return (
-            <DayChart
+            <CanvasjsDayChart
                 stockData={this.props.stock}
             />
         )
@@ -40,4 +40,4 @@ const mapStateToProps = (state) => {
 export default connect(
     mapStateToProps,
     { fetchDayChart }
-)(CallingDayChart);
+)(Chart);

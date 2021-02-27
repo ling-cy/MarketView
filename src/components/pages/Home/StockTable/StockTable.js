@@ -3,7 +3,7 @@ import { TableBody, TableContainer, TableHead, TableRow, Paper } from '@material
 import {
     STable, SymbolTableRow, BodyTypography, BodyThTypography,
     HeadTableCell, CaptionTableCell, SymbolTableCell
-} from './StyledComponent'
+} from './StockTableStyledComponent'
 import history from '../../../../history'
 
 

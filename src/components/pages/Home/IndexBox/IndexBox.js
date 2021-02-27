@@ -1,6 +1,6 @@
 import React from 'react';
 import { TableBody, TableRow } from '@material-ui/core';
-import { ITable, StyledTableCell } from './StyledComponent'
+import { ITable, StyledTableCell } from './IndexBoxStyledComponent'
 
 const textColor = (value) => {
     if (value > 0) {

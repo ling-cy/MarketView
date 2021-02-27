@@ -8,7 +8,7 @@ const CanvasJSStockChart = CanvasJSReact.CanvasJSStockChart;
 const risingColor = '#2a9d8f';
 const fallingColor = '#e63946';
 
-const Chart = (props) => {
+const CanvasjsDayChart = (props) => {
     const { stockData } = props;
     const { darkTheme } = useSelector(state => ({
         darkTheme: state.theme.darkMode,
@@ -389,4 +389,4 @@ const Chart = (props) => {
 
 }
 
-export default Chart; 
+export default CanvasjsDayChart; 

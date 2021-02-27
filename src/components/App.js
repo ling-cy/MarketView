@@ -11,7 +11,7 @@ import ResponsiveAppBar from './ResponsiveAppBar/ResponsiveAppBar';
 import Home from './pages/Home/Home';
 import Search from './pages/SearchResult/SearchResult';
 import SymbolDetail from './pages/SymbolDetail/SymbolDetail';
-import Footer from './footer/footer'
+import Footer from './Footer/Footer'
 
 import Error from './pages/errors/Error';
 

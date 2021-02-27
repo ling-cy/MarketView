@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSSQuote, fetchSSStat, fetchSSNews } from '../../../../actions'
 
-import { HeaderA, HeaderB, HeaderC, HeaderD, HeaderE, HContainer } from './StyledComponent'
+import { HeaderA, HeaderB, HeaderC, HeaderD, HeaderE, HContainer } from './HeaderStyledComponent'
 
 
 const textColor = (value) => {

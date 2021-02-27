@@ -1,5 +1,5 @@
 import React from 'react';
-import { FContainer, FTypo } from './StyledComponent'
+import { FContainer, FTypo } from './FooterStyledComponent'
 
 const Footer = () => {
     return (

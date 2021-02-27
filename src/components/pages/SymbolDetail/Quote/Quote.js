@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux'
 import { Table, TableBody, TableRow, Grid, TableHead } from '@material-ui/core';
-import { HeadTableCell, BodyTableCell, BodyTableRow, BodyTypography, BodyThTypography } from "./StyledComponent"
+import { HeadTableCell, BodyTableCell, BodyTableRow, BodyTypography, BodyThTypography } from "./QuoteStyledComponent"
 import { fetchSSStat } from '../../../../actions';
 
 
