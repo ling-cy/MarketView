@@ -32,6 +32,9 @@ export const searchBarStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
+        [theme.breakpoints.down('xs')]: {
+            display: 'none',
+        },
     },
     search: {
         position: 'relative',
@@ -52,7 +55,9 @@ export const searchBarStyles = makeStyles((theme) => ({
         color: 'inherit',
     },
     inputInput: {
-        padding: theme.spacing(1, 1, 1, 0),
+        paddingTop: theme.spacing(1),
+        paddingBottom: theme.spacing(1),
+        paddingRight: theme.spacing(1),
         // vertical padding + font size from searchIcon
         paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
         transition: theme.transitions.create('width'),
@@ -60,15 +65,13 @@ export const searchBarStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             width: '20ch',
         },
+        [theme.breakpoints.down('xs')]: {
+            paddingLeft: '1em',
+        },
     },
 }));
 
 export const appBarStyles = makeStyles((theme) => ({
-    appBar: {
-        zIndex: theme.zIndex.drawer + 1,
-        backgroundColor: '#777777',
-        boxShadow: 'none',
-    },
     logoL: {
         maxWidth: "150px",
         padding: theme.spacing(1),

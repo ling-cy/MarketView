@@ -21,7 +21,7 @@ const PageAppBar = () => {
     return (
         <AppBar
             position="fixed"
-            className={classes.appBar}
+            style={{ backgroundColor: 'rgb(136,136,136,0.9)' }}
         >
             <Toolbar>
                 <Link to='/'>
