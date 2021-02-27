@@ -16,7 +16,7 @@ const useScript = (url, type, innerHTML, id, parentsId) => {
         return () => {
             clearTimeout(timeoutId);
         }
-    }, [innerHTML])
+    }, [innerHTML, id, parentsId])
 
     useEffect(() => {
         const script1 = document.createElement('script');
@@ -40,7 +40,7 @@ const useScript = (url, type, innerHTML, id, parentsId) => {
                 panelDiv.remove();
             }
         }
-    }, [debouncedText]);
+    }, [debouncedText, id, type, url]);
 };
 
 export default useScript;

@@ -2,7 +2,6 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { fetchSSQuote, fetchSSStat, fetchSSNews } from '../../../../actions'
 
-import PropTypes from 'prop-types';
 import { HeaderA, HeaderB, HeaderC, HeaderD, HeaderE, HContainer } from './StyledComponent'
 
 
@@ -89,10 +88,6 @@ const mapStateToProps = (state) => {
         theme: state.theme.theme,
     }
 }
-
-Header.propTypes = {
-    location: PropTypes.object.isRequired,
-};
 
 export default connect(
     mapStateToProps,

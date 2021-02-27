@@ -85,7 +85,6 @@ class SearchResult extends React.Component {
                         spacing={1}
                         direction='column'
                         justify='flex-start'
-                        alignItems='left'
                     >
                         <Grid item sm={12}>
                             {this.resultCount()}

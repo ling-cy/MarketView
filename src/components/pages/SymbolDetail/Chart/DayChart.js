@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CanvasJSReact from './assets/canvasjs.stock.react';
 let CanvasJS = CanvasJSReact.CanvasJS;
@@ -25,7 +25,7 @@ const Chart = (props) => {
         //set data from props to variables
         const loadData = (sData) => {
             let dps1 = [], dps2 = [], dps3 = [];
-            sData.map(data => {
+            sData.forEach(data => {
                 dps1.push({
                     x: new Date(data.date),
                     y: [
@@ -37,6 +37,7 @@ const Chart = (props) => {
                 });
                 dps2.push({ x: new Date(data.date), y: Number(data.volume) });
                 dps3.push({ x: new Date(data.date), y: Number(data.close) });
+                return;
             });
 
             //set color to the data

@@ -68,20 +68,19 @@ class Home extends React.Component {
                     const data = panel.data;
                     if (!data || data === null) {
                         return (
-                            <Paper className={classes.paper}>
-                                <div className={classes.cir} key={index}>
+                            <Paper className={classes.paper} key={index}>
+                                <div className={classes.cir} >
                                     <CircularProgress />
                                 </div>
                             </Paper>
                         )
                     }
                     return (
-                        <Grid item sm={12} xs={12} className={classes.stockPanel}>
+                        <Grid item sm={12} xs={12} className={classes.stockPanel} key={index}>
                             <Paper className={classes.paper}>
                                 <Typography className={classes.spHeader}>Stocks: {panel.name}</Typography>
                                 <StockTable
                                     stockSymbols={data}
-                                    key={index}
                                 />
                             </Paper>
                         </Grid>
@@ -149,7 +148,6 @@ class Home extends React.Component {
                         </Grid>
                     </Grid>
                 </Grid>
-                {/* </Grid> */}
             </main >
         )
     }

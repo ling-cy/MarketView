@@ -63,7 +63,6 @@ const AppDrawer = () => {
             >
                 <Toolbar>
                     <Icon
-                        color="default"
                         edge="start"
                         className={classes.themeIcon}
                     >

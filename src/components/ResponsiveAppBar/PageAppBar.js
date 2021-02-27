@@ -32,7 +32,6 @@ const PageAppBar = () => {
 
                 <div className={classes.appBarIcon}>
                     <Icon
-                        color="default"
                         edge="start"
                         className={classes.themeIcon}
                     >
@@ -40,7 +39,6 @@ const PageAppBar = () => {
                     </Icon>
                     <Icon
                         edge="end"
-                        color="default"
                         className={classes.menuIcon}
                         onClick={() => { dispatch(handleDrawerToggle(!isDrawerOpen)) }}
                     >
