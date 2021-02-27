@@ -8,7 +8,7 @@ import { Paper, Grid, CircularProgress, Typography } from '@material-ui/core';
 import { homeStyles } from './homeStyles'
 import { handleModalOpen, handleModalClose } from '../../../actions';
 import NewsCard from '../News/NewsCard/NewsCard';
-import NewsPortal from '../News/NewsPortal/NewsPortal';
+import NewsPortal from './HomeNewsPortal';
 import StockTable from './StockTable/StockTable'
 import IndexBox from './IndexBox/IndexBox'
 
@@ -28,9 +28,9 @@ class Home extends React.Component {
                         <div key={index} onClick={() => { this.props.handleModalOpen(index) }} >
                             <NewsCard
                                 newsTitle={news.title}
-                                newsSource={news.source.name}
-                                newsImg={news.urlToImage}
-                                pTime={news.publishedAt}
+                                newsSource={`The New Yok Times (${news.section})`}
+                                newsImg={news.multimedia ? news.multimedia[0].url : ''}
+                                pTime={news.published_date}
                             />
 
                         </div>

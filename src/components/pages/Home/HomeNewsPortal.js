@@ -7,9 +7,9 @@ import { ThemeProvider, withStyles } from '@material-ui/core/styles';
 import {
     Typography, Modal, Card, CardContent, CardMedia, Divider
 } from '@material-ui/core';
-import NewsPortalShare from './NewsPortalShare';
-import theme, { styles } from './NewsPortalStyles';
-import { handleModalClose } from '../../../../actions';
+import NewsPortalShare from '../News/NewsPortal/NewsPortalShare';
+import theme, { styles } from '../News/NewsPortal/NewsPortalStyles';
+import { handleModalClose } from '../../../actions';
 
 
 class NewsPortal extends React.Component {
@@ -31,7 +31,7 @@ class NewsPortal extends React.Component {
                     <CardMedia
                         component='img'
                         alt='News Image'
-                        image={article.urlToImage}
+                        image={article.multimedia ? article.multimedia[0].url : ''}
                         className={classes.cover}
                     />
                     <CardContent className={classes.cardContent}>
@@ -41,14 +41,14 @@ class NewsPortal extends React.Component {
                                     <b>{article.title}</b>
                                 </Typography>
                                 <Typography className={classes.detail} variant='body2' >
-                                    <b>{article.author}</b> - {article.source.name}<br />
-                                    <TimeAgo date={article.publishedAt} />
+                                    <b>{article.byline}</b> - The New York Times<br />
+                                    <TimeAgo date={article.published_date} />
                                 </Typography>
                             </div>
                             <Divider variant='middle' />
                             <div className={classes.section2}>
                                 <Typography variant='body2' component='p'>
-                                    {article.description}
+                                    {article.abstract}
                                 </Typography>
                                 <br />
                                 <Typography onClick={() => window.open(`${article.url}`, '_blank')}
