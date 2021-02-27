@@ -5,7 +5,7 @@ const Footer = () => {
     return (
         <FContainer>
             <FTypo>
-                © 2021 CY.LING. All Rights Reserved.
+                © {new Date().getFullYear()} CY.LING. All Rights Reserved.
             </FTypo>
 
         </FContainer>

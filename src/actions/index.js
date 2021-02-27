@@ -10,14 +10,14 @@ import FM from '../apis/financialModelingAPI'
 import Polygon from '../apis/polygonioAPI'
 import history from '../history';
 
-import { fetchNewsError, fetchChartError } from './error'
+import { fetchNewsError } from './error'
 
 
 export const fetchBusinessNews = () => async dispatch => {
     const response = await businessNews.get('/top-headlines', {
         params: {
             sources: 'business-insider,the-wall-street-journal',
-            apiKey: process.env.REACT_APP_API_KEY_businessNews
+            apiKey: process.env.REACT_APP_API_KEY_BUSINESSNEWS
         }
     }).catch(
         dispatch({ type: BUSINESS_NEWS, payload: fetchNewsError })
@@ -57,28 +57,22 @@ export const handleModalClose = () => {
 }
 
 export const fetchHomeStock = () => async dispatch => {
-    const resGain = await IEX.get('/stock/market/list/gainers', {
-        params: {
-            token: process.env.REACT_APP_API_KEY_IEX1,
-        }
-    })
-    const resLose = await IEX.get('/stock/market/list/losers', {
-        params: {
-            token: process.env.REACT_APP_API_KEY_IEX1,
-        }
-    });
-    const resActive = await IEX.get('/stock/market/list/mostactive', {
-        params: {
-            token: process.env.REACT_APP_API_KEY_IEX1,
-        }
-    });
-
+    function fetchMarketList(list) {
+        return IEX.get(`/stock/market/list/${list}`, {
+            params: {
+                token: process.env.REACT_APP_API_KEY_IEX1,
+            }
+        })
+    }
+    const gainers = await fetchMarketList('gainers')
+    const losers = await fetchMarketList('losers')
+    const mostactive = await fetchMarketList('mostactive')
 
     dispatch({
         type: FETCH_HOMESTOCK, payload: {
-            gainers: resGain,
-            losers: resLose,
-            active: resActive,
+            gainers: gainers,
+            losers: losers,
+            active: mostactive,
         }
     })
 };
@@ -164,7 +158,7 @@ export const fetchSSNews = (symb) => async dispatch => {
             q: symb,
             sortBy: 'publishedAt',
             language: 'en',
-            apiKey: process.env.REACT_APP_API_KEY_businessNews,
+            apiKey: process.env.REACT_APP_API_KEY_BUSINESSNEWS,
         }
     }).catch(
         dispatch({ type: FETCH_SSNEWS, payload: fetchNewsError })
@@ -183,7 +177,7 @@ export const searchSymb = (symb) => async dispatch => {
             market: 'stocks',
             locale: 'us',
             active: true,
-            apiKey: process.env.REACT_APP_API_KEY_Polygon,
+            apiKey: process.env.REACT_APP_API_KEY_POLYGON,
         }
     })
     dispatch({
